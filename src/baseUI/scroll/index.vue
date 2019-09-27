@@ -1,15 +1,28 @@
 <template>
   <div ref="wrapper" class="scroll-container">
     <slot/>
+    <div class="pull-up-loading" v-show="pullUpLoading">
+      <Loading></Loading>
+    </div>
+    <div class="pull-down-loading" v-show="pullDownLoading">
+      <LoadingV2></LoadingV2>
+    </div>
+
   </div>
 </template>
 
 <script>
   import BScroll from 'better-scroll'
   import { debounce } from '../../api/utils'
+  import Loading from '../loading'
+  import LoadingV2 from '../loading2'
 
   export default {
     name: 'scroll',
+    components: {
+      Loading,
+      LoadingV2
+    },
     props: {
       direction: {
         type: String,
@@ -60,6 +73,8 @@
     mounted() {
      this.$nextTick(() => {
        this._initScroll()
+       this._pullUpDebounce = debounce(this.pullUp, 1000)
+       this._pullDownDebounce =  debounce(this.pullDown, 300)
      })
     },
     methods: {
@@ -88,7 +103,7 @@
         if (this.scroll && this.pullUp) {
           this.scroll.on('scrollEnd', () => {
             if (this.scroll.y <= this.scroll.maxScrollY + 100) {
-              debounce(this.pullUp, 300)
+              this._pullUpDebounce()
             }
           })
         }
@@ -97,7 +112,7 @@
         if (this.scroll && this.pullDown) {
           this.scroll.on('touchEnd', pos => {
             if (pos.y > 50) {
-              debounce(this.pullDown, 300)
+              this._pullDownDebounce()
             }
           })
         }
@@ -105,6 +120,12 @@
         // 刷新
         if (this.refresh && this.scroll) {
           this.scroll.refresh()
+        }
+      },
+      scrollRefresh() {
+        if(this.scroll) {
+          this.scroll.refresh();
+          this.scroll.scrollTo(0, 0);
         }
       }
     },
@@ -122,5 +143,22 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+  }
+  .pull-up-loading{
+    position: absolute;
+    left:0; right:0;
+    bottom: 5px;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    z-index: 100;
+  }
+  .pull-down-loading{
+    position: absolute;
+    left:0; right:0;
+    top: 0;
+    height: 30px;
+    margin: auto;
+    z-index: 100;
   }
 </style>
