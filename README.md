@@ -10,4 +10,15 @@
 
 `react hooks`开发体验确实不错，`vue3.0`也将采用类似的实现方式,赶快来一起学习吧
 
+运行
+```
+git clone https://github.com/hedekun/vue-cloud-music.git
+
+cd vue-cloud-music
+
+npm install 或 yarn
+
+npm run serve
+```
+
 
