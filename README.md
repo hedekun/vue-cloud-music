@@ -1,29 +1,13 @@
-# vue-cloud-music
+# 使用vue全家桶仿网易云音乐打造精美app
 
-## Project setup
-```
-yarn install
-```
+由于公司技术栈主要是vue全家桶，一直没有使用react全家桶开发过项目。
+最近发现[三元](https://github.com/sanyuan0704')开源了仿网易云app[react-cloud-music](https://github.com/sanyuan0704/react-cloud-music),
+并且有详细的[教程]('https://sanyuan0704.github.io/react-cloud-music')
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+目前正在学习此项目
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+本项目为该项目的`vue`版本，目录结构和实现方式完全参照[react](https://github.com/sanyuan0704/react-cloud-music)版本。可类比学习。
 
-### Run your tests
-```
-yarn run test
-```
+`react hooks`开发体验确实不错，`vue3.0`也将采用类似的实现方式,赶快来一起学习吧
 
-### Lints and fixes files
-```
-yarn run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
