@@ -94,8 +94,9 @@
         })
         // 滚动事件
         if (this.scroll && this.onScroll) {
-          this.scroll('on', scroll => {
-            this.$emit('scroll', scroll)
+          this.scroll.on('scroll', scroll => {
+            this.onScroll(scroll)
+            // this.$emit('scroll', scroll)
           })
         }
 
