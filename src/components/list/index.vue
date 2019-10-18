@@ -2,7 +2,7 @@
   <div class="list-wrapper">
     <h1 class="title">推荐歌单</h1>
     <div class="list">
-      <div v-for="(item, index) in recommendList" :key="item.id + index" class="list-item">
+      <div v-for="(item, index) in recommendList" :key="item.id + index" class="list-item" @click="enterDetail(item.id)">
         <div class="img_wrapper">
           <div class="decorate"/>
           <img v-lazy='item.picUrl + "?param=300x300"' width="100%" height="100%" alt="music"/>
@@ -35,6 +35,11 @@
       recommendList: {
         type: Array,
         default: () => []
+      }
+    },
+    methods: {
+      enterDetail(id) {
+        this.$router.push(`/recommend/${id}`)
       }
     }
   }

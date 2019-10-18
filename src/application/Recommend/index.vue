@@ -7,6 +7,7 @@
         <Loading v-show="enterLoading"/>
       </div>
     </Scroll>
+    <router-view />
   </div>
 </template>
 

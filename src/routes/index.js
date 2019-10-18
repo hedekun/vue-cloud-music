@@ -15,7 +15,14 @@ const routes = [
       },
       {
         path: '/recommend',
-        component: () => import('../application/Recommend')
+        component: () => import('../application/Recommend'),
+        children: [
+          {
+            path: '/recommend/:id',
+            name: 'detail',
+            component: () => import('../application/Album')
+          }
+        ]
       },
       {
         path: '/singers',
@@ -24,13 +31,13 @@ const routes = [
       {
         path: '/rank',
         component: () => import('../application/Rank')
-      },
+      }
     ]
   }
 ]
 
 export default new Router({
   mode: 'history',
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes
 })
