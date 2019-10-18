@@ -1,7 +1,7 @@
 <template>
   <div class="album-container">
     <MyHeader ref="headerEl" :title="title" :isMarquee="isMarquee" :handleClick="handleBack"/>
-    <Scroll :bounce-top="false" :on-scroll="handleScroll" v-if="currentAlbum">
+    <Scroll :bounce-top="false" :on-scroll="handleScroll" v-if="currentAlbum.coverImgUrl">
       <div>
         <div class="top-desc">
           <div class="background" :style="{backgroundImage:'url(' + currentAlbum.coverImgUrl + ')'}">
@@ -72,6 +72,7 @@
         </div>
       </div>
     </Scroll>
+    <Loading v-show="enterLoading"/>
   </div>
 </template>
 
@@ -79,14 +80,16 @@
   import {getCount, getName} from "../../api/utils"
   import MyHeader from '../../baseUI/header'
   import Scroll from '../../baseUI/scroll'
+  import Loading from '../../baseUI/loading'
   import {createNamespacedHelpers} from 'vuex'
 
-  const {mapState, mapActions} = createNamespacedHelpers('album')
+  const {mapState, mapActions, mapMutations} = createNamespacedHelpers('album')
   export default {
     name: "album",
     components: {
       MyHeader,
-      Scroll
+      Scroll,
+      Loading
     },
     data() {
       return {
@@ -105,6 +108,7 @@
     },
     methods: {
       ...mapActions(['getAlbumList', 'changeEnterLoading']),
+      ...mapMutations(['CHANGE_CURRENT_ALBUM']),
       getCount: getCount,
       getName: getName,
       getAlbumData(id) {
@@ -115,9 +119,9 @@
         const minScrollY = -45
         const percent = Math.abs(pos.y / minScrollY)
         const headerDom = this.$refs.headerEl.$el
-        if(pos.y < minScrollY) {
+        if (pos.y < minScrollY) {
           headerDom.style.backgroundColor = '#d44439'
-          headerDom.style.opacity = Math.min(1, (percent -1)/2)
+          headerDom.style.opacity = Math.min(1, (percent - 1) / 2)
           this.title = this.currentAlbum.name
           this.isMarquee = true
         } else {
@@ -130,6 +134,10 @@
       handleBack() {
         this.$router.go(-1)
       },
+    },
+    beforeDestroy() {
+      // 返回时候清空vuex中的数据
+      this.CHANGE_CURRENT_ALBUM({})
     }
   }
 </script>
