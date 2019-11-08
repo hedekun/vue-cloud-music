@@ -60,7 +60,6 @@ const actions = {
     })
   },
   pullUpRefresh: ({commit, dispatch, state}, {hot, category, alpha}) => {
-    console.log('chufa')
     commit('CHANGE_PULL_UP_LOADING', true)
     commit('CHANGE_PAGE_COUNT', state.pageCount + 1)
     if (hot) {

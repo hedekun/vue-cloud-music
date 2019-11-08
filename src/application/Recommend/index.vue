@@ -7,7 +7,9 @@
         <Loading v-show="enterLoading"/>
       </div>
     </Scroll>
-    <router-view />
+    <transition name="fly">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -54,5 +56,12 @@
   top: 90px;
   bottom: 0;
   width: 100%;
+}
+.fly-enter, .fly-leave-to{
+  transform: rotateZ(30deg) translate3d(100%, 0, 0);
+  transform-origin: right bottom;
+}
+.fly-enter-active, .fly-leave-active{
+  transition: transform .3s;
 }
 </style>

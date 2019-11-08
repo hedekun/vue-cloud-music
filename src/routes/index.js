@@ -26,7 +26,13 @@ const routes = [
       },
       {
         path: '/singers',
-        component: () => import('../application/Singers')
+        component: () => import('../application/Singers'),
+        children: [
+          {
+            path: '/singers/:id',
+            component: () => import('../application/Singer')
+          }
+        ]
       },
       {
         path: '/rank',

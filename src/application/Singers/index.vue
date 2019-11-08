@@ -7,7 +7,7 @@
     <div class="list-container">
       <Scroll :pull-up="handlePullUp" :pull-up-loading="pullUpLoading" :pull-down-loading="pullDownLoading" :pull-down="handlePullDown" ref="scroll">
         <div class="list">
-          <div class="list-item" v-for="(item, index) in singerList" :key="item.accountId + '' + index">
+          <div class="list-item" v-for="(item, index) in singerList" :key="item.accountId + '' + index" @click="enterDetail(item.id)">
             <div class="img_wrapper">
               <img v-lazy="`${item.picUrl}?param=300*300`" alt="music" width="100%" height="100%"/>
             </div>
@@ -17,6 +17,7 @@
       </Scroll>
       <Loading v-show="enterLoading"></Loading>
     </div>
+    <router-view />
   </div>
 </template>
 
@@ -95,6 +96,9 @@
           category: this.category,
           alpha: this.alpha,
         })
+      },
+      enterDetail(id) {
+        this.$router.push(`/singers/${id}`)
       }
     }
   }
