@@ -20,7 +20,6 @@ npm install 或 yarn
 
 npm run serve
 
-OK
 ```
 
 
