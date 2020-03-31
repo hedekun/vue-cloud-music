@@ -19,6 +19,8 @@ cd vue-cloud-music
 npm install 或 yarn
 
 npm run serve
+
+OK
 ```
 
 
