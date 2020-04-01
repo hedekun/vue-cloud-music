@@ -20,6 +20,7 @@ npm install 或 yarn
 
 npm run serve
 
+jenkins test
 ```
 
 
